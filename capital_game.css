@@ -1,0 +1,46 @@
+body {
+    background-color: #eee;
+}
+
+.table-main{
+	margin-left: auto;
+	margin-right: auto;
+	width: 550px;
+	padding: 4px;
+	border-collapse: collapse;
+	border: 5px 5px 5px 5px;
+/*	border-color: #009879*/
+}
+.table-main thead tr{
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+	border-bottom: 2px solid #000000; 
+}
+.table-main th,
+.table-main td{
+	border-bottom: 1px solid #000000;
+}
+.waiting{
+	font-size: 20px;
+	color: black;
+}
+.correct{
+	font-size: 20px;
+	color: green;
+}
+.wrong{
+	font-size: 20px;
+	color: red;
+}
+.wrong_mid{
+	font-size: 20px;
+	color: red;
+	text-decoration: line-through;
+}
+.wrong_right{
+	font-size: 20px;
+	color: red;
+	font-style: italic;
+}
+/*your code here*/
