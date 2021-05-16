@@ -1,52 +1,95 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Captial Game</title>
+    <title>20200822 - Dang Minh Hoang</title>
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet" />  <link href="./capital_game.css" rel="stylesheet" />
-  </head>
-  <body onload = "reload()">
-    <!--Your HTML here-->
-    <!--Your code here-->
-    <div style = "text-align: center;">
-    <h1 style = "font-size: 50px;">World Capital Quiz Game</h1>
-    <h2 style = "font-size: 30px;">Do you know the capital of these countries?</h2>
-    <div>
-      <select id="filter_select" onchange="Change()">
-        <option>All</option>
-        <option>Correct</option>
-        <option>Wrong</option>
-      </select>
-    </div>
-    <div id="container">
-    <table class="table-main" id = "Table">
-      <thead>
-        <tr>
-          <th>COUNTRY</th>
-          <th>CAPITAL CITY</th>
-          <th>ANSWER</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="waiting">
-          <td id = "pr2__country"></td>
-          <td id = "pr2__capital"><input id = "cac" type="text"></td>
-          <td id = "pr2__button"><button id = "checkans" onclick="checkandrefresh()">Check Answer</button></td>
-        </tr>
-        <tr class="init">
-          <td></td>
-          <td style="text-align: center;">The list is empty</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-  </div>
+    <link href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css" rel="stylesheet" /> 
+    <link href="./capital_game.css" rel="stylesheet" />
+
     <script src="jquery/js/jquery-1.9.0.min.js"></script>
-    <script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>
-    <script src="./country_capital_pairs.js"></script>
+    <script src="jquery/js/jquery-ui-1.10.0.custom.min.js"></script>    
+
+
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+
+
+  </head>
+  <body>
+    <!-- HTML Body -->
+    <div style = "text-align: center;">
+	    <h1 style = "font-size: 50px;">World Capital Quiz Game</h1>
+	    <h2 style = "font-size: 30px;">Do you know the capital of these countries?</h2>
+
+
+	    <!-- Map -->
+		<div id='map' style='width: 600px; height: 450px; margin:0 auto; border-width: 3px;border-color: transparent; border: solid;'></div>
+		<br>
+		<!-- Map -->
+
+
+	    <div>
+		    <select id="filter_select" onchange="Change()">
+		        <option>All</option>
+		        <option>Correct</option>
+		        <option>Wrong</option>
+		    </select>
+		    <button id = "pr3_reset" onclick = "reset()">Reset</button>
+		    <button id = "pr3_clear" onclick = "rowClear(1)">Clear</button>
+		    <button id = "pr3_undo" onclick = "Undo()">Undo</button>
+	    </div>
+	    <div id="container">
+		    <table class="table-main" id = "pr2_table">
+		        <thead>
+			        <tr>
+			          <th>COUNTRY</th>
+			          <th>CAPITAL CITY</th>
+			          <th>ANSWER</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <tr class="waiting" id ="waiting">
+			            <td id = "pr2__country"></td>
+			            <td id = "pr2__capital" style="background-color: transparent; margin: 0px;"><input id = "pr2_input" type="text"></td>
+			            <td id = "3rd_columm" style="background-color: transparent; margin: 0px;"><button id = "pr2__button" onclick="processInput()">Check Answer</button></td>
+			        </tr>
+			        <tr class="init">
+			            <td></td>
+			            <td style="text-align: center;">The list is empty</td>
+			            <td></td>
+			        </tr>
+		        </tbody>
+		    </table>
+	    </div>
+ 	</div>
+ 	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-database.js"></script> 
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	     https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-analytics.js"></script>
+
+	<script>
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyC3dIYfkpgwygwRKiHvh-PrP1b48sEyBFs",
+	    authDomain: "hci-pr3-24263.firebaseapp.com",
+	    databaseURL: "https://hci-pr3-24263-default-rtdb.asia-southeast1.firebasedatabase.app",
+	    projectId: "hci-pr3-24263",
+	    storageBucket: "hci-pr3-24263.appspot.com",
+	    messagingSenderId: "54193776037",
+	    appId: "1:54193776037:web:14bef02b8a17aaeda9b44c",
+	    measurementId: "G-1HYT73JE1G"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.analytics();
+	</script>
     <script src="./capital_game.js"></script>
   </body>
 </html>

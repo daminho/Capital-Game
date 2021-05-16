@@ -28,19 +28,39 @@ body {
 .correct{
 	font-size: 20px;
 	color: green;
+	cursor: default;
+	background-color: transparent;
 }
+
 .wrong{
 	font-size: 20px;
 	color: red;
+	background-color: transparent;
 }
 .wrong_mid{
 	font-size: 20px;
 	color: red;
 	text-decoration: line-through;
+	cursor: default;
+	background-color: transparent;
 }
 .wrong_right{
 	font-size: 20px;
 	color: red;
 	font-style: italic;
+	cursor: default;
+	margin: 0;
+	background-color: transparent;
+}
+.correct_right{
+	font-size: 20px;
+	color: green;
+	cursor: default;
+	margin: 0;
+	background-color: transparent;
+}
+
+.country{
+	cursor: default;
 }
 /*your code here*/
